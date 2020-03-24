@@ -2,8 +2,10 @@
 
 require 'Pokemon.php';
 require 'Pikachu.php';
+require 'Charmeleon.php';
 
-	$pokemon = new Pikachu();
+	$pokemonP = new Pikachu();
+	$pokemonC = new Charmeleon();
 
 ?>
 	
@@ -16,7 +18,12 @@ require 'Pikachu.php';
 <body>
 
 	<?php
-	echo $pokemon->getName()
+	echo $pokemonP->getName();
+	echo $pokemonP->getHealth();
+	echo $pokemonP->getHitPoints();
+	echo $pokemonC->getName();
+	echo $pokemonC->getHealth();
+	echo $pokemonC->getHitPoints();
 	?>
 
 </body>

@@ -19,10 +19,21 @@ require 'Charmeleon.php';
 
 	<?php
 	echo $pokemonP->getName();
+	echo str_repeat("&nbsp;", 1); 
+	echo $pokemonP->getEnergyType();
+	echo str_repeat("&nbsp;", 1); 
 	echo $pokemonP->getHealth();
+	echo str_repeat("&nbsp;", 1); 
 	echo $pokemonP->getHitPoints();
+	?>
+	<br>
+	<?php
 	echo $pokemonC->getName();
+	echo str_repeat("&nbsp;", 1); 
+	echo $pokemonC->getEnergyType();
+	echo str_repeat("&nbsp;", 1); 
 	echo $pokemonC->getHealth();
+	echo str_repeat("&nbsp;", 1); 
 	echo $pokemonC->getHitPoints();
 	?>
 

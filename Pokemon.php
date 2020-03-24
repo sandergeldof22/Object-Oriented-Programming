@@ -22,11 +22,15 @@ class Pokemon {
       return $this->Name;
     }
 
+    public function getEnergyType() {
+    	return $this->EnergyType;
+    }
+
     public function getHealth() {
       return $this->Health;
     }
 
     public function getHitPoints() {
-      return $this->HitPoints;
+      return $this->Hitpoints;
     }
 }

@@ -10,8 +10,7 @@ class Pokemon {
 	public $Weakness;
 	public $Resistance;
 
-    public function __construct($Name, $EnergyType, $Health, $HitPoints)
-    {
+    public function __construct($Name, $EnergyType, $Health, $HitPoints) {
         $this->Name = $Name;
         $this->EnergyType = $EnergyType;
         $this->Health = $Health;
@@ -19,15 +18,15 @@ class Pokemon {
         $this->Attacks = [];
     }
 
-    public function getName(){
-      return $this->name;
+    public function getName() {
+      return $this->Name;
     }
 
-    public function getHealth(){
-      return $this->health;
+    public function getHealth() {
+      return $this->Health;
     }
 
-    public function getHitPoints(){
-      return $this->hitPoints;
+    public function getHitPoints() {
+      return $this->HitPoints;
     }
 }

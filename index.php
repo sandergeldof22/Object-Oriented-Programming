@@ -28,13 +28,12 @@ require 'Weakness.php';
 	echo $pokemonP->getHealth();
 	echo str_repeat("&nbsp;", 1); 
 	echo $pokemonP->getHitPoints();
-	$data = $pokemonP->GetAttacks();
-	print_r($data);
 	echo str_repeat("&nbsp;", 1); 
 	?>
 	<br>
 	<?php
 	print_r($pokemonP);
+	echo str_repeat("&nbsp;", 1); 
 	?>
 	<br>
 	<?php
@@ -45,6 +44,11 @@ require 'Weakness.php';
 	echo $pokemonC->getHealth();
 	echo str_repeat("&nbsp;", 1); 
 	echo $pokemonC->getHitPoints();
+	?>
+	<br>
+	<?php
+	echo str_repeat("&nbsp;", 1); 
+	print_r($pokemonC);
 	?>
 
 </body>

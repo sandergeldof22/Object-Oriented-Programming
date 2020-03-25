@@ -2,13 +2,13 @@
 
 class Pokemon {
 
-	public $Name;
-	public $EnergyType;
-	public $Hitpoints;
-	public $Health;
-	public $Attacks;
-	public $Weakness;
-	public $Resistance;
+	private $Name;
+	private $EnergyType;
+	private $Hitpoints;
+	private $Health;
+	private $Attacks;
+	private $Weakness;
+	private $Resistance;
 
     public function __construct($Name, $EnergyType, $Health, $HitPoints) {
         $this->Name = $Name;
@@ -33,4 +33,10 @@ class Pokemon {
     public function getHitPoints() {
       return $this->Hitpoints;
     }
+
+    public function __get($property) {
+		if (property_exists($this, $property)){
+			return $this->$property;
+		}
+	}
 }

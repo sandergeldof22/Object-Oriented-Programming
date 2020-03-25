@@ -6,7 +6,7 @@ class Weakness {
 	private $multiplier;
 
 	public function __construct($energyTypeW, $multiplier){
-		$this->$energyTypeW = $energyType;
+		$this->$energyTypeW = $energyTypeW;
 		$this->multiplier = $multiplier;
 	}
 
@@ -22,4 +22,5 @@ class Weakness {
 		if (property_exists($this, $property)){
 			return $this->$property;
 		}
+	}
 }

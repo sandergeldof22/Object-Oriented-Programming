@@ -34,6 +34,10 @@ class Pokemon {
       return $this->Hitpoints;
     }
 
+    public function GetAttacks() {
+    	return $this->Attacks;
+    }
+
     public function __get($property) {
 		if (property_exists($this, $property)){
 			return $this->$property;

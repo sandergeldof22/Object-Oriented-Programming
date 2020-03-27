@@ -23,4 +23,8 @@ class Attack {
 			return $this->$property;
 		}
 	}
+
+	public function AttackEnemy($enemy){
+		echo $target->getName();
+	}
 }

@@ -43,4 +43,8 @@ class Pokemon {
 			return $this->$property;
 		}
 	}
+
+	public function AttackEnemy($enemy){
+		echo $enemy->getName();
+	}
 }

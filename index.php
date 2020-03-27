@@ -50,6 +50,11 @@ require 'Weakness.php';
 	echo str_repeat("&nbsp;", 1); 
 	print_r($pokemonC);
 	?>
+	<br>
+	<br>
+	<?php
+	$pokemonP->AttackEnemy($pokemonC);
+	?>
 
 </body>
 </html>

@@ -2,20 +2,20 @@
 
 class Weakness {
 	
-	private $energyTypeW;
-	private $multiplier;
+	private $EnergyWeakness;
+	private $Multiplier;
 
-	public function __construct($energyTypeW, $multiplier){
-		$this->$energyTypeW = $energyTypeW;
-		$this->multiplier = $multiplier;
+	public function __construct($EnergyWeakness, $Multiplier){
+		$this->EnergyWeakness = $EnergyWeakness;
+		$this->Multiplier = $Multiplier;
 	}
 
-	public function getEnergyTypeWeakness() {
-		$this->energyTypeW = $energyTypeW;
+	public function getEnergyWeakness() {
+		return $this->EnergyWeakness;
 	}
 
 	public function getMultiplier() {
-		$this->multiplier = $multiplier;
+		return $this->Multiplier;
 	}
 
 	public function __get($property) {

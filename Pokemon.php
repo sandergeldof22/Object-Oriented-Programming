@@ -19,8 +19,8 @@ class Pokemon {
         $this->Health = $Health;
         $this->Hitpoints = $HitPoints;
         $this->Attack = [];
-        $this->Weakness = $Weakness;
-        $this->Resistance = $Resistance;
+        $this->Weakness = [];
+        $this->Resistance = [];
     }
 
     public function getName() {
@@ -46,33 +46,39 @@ class Pokemon {
 	}
 
 	public function AttackEnemy($enemy){
+		$energy = $this->getEnergyType();	
+        $Attack = $this->Attack[0]->getAttack();
+        $Damage = $this->Attack[0]->Damage;
+        $enemy = $enemy->getName();
 		// $enemy voor de verdedigende vijand, //$this voor de aanvaller
-		echo "Your pokemon " . $this->getName() . " will attack the enemy " . $enemy->getName();
+		echo "Your pokemon " . $this->getName() . " will attack the enemy " . $enemy;
 		echo '<br>';
 		echo $this->getName() . " use your " . $this->Attack[0]->getAttack();
-		echo '<br>';	
-        if ($this->energyType == $enemy->Weakness->energyType) {
-        	$totalDMG = ($this->Attack[0]->Damage * $enemy->Multiplier);
+		echo '<br>';
+        if ($energy == $enemy->Weakness->energyWeakness) {
+        	$totalDMG = ($this->Attack[0]->Damage * $enemy->Weakness->Multiplier);
         	echo $totalDMG;
         	$enemy->Health = $enemy->Health - $totalDMG;
         	echo '<br>';
-            echo $enemy->getHealth(); //<- moet 20 damage worden, is nu nog 60 damage.
+            echo $enemy->getHealth();
             echo '<br>';
+            echo 'Weakness';
         } else if ($this->energyType == $enemy->Resistance->energyType) {
+        	echo $Attack . " will deal " . $Damage;
+        	echo '<br>';
+        	echo "However " . $enemy . " has a resistance to your " . $Attack;
+        	echo '<br>';
+        	echo "The resistance will block ... Damage, Meaning the " . $Attack . " will deal only ... damage";
+        	$Resist = $this->Resistance->energytype;
+        	echo $Resist;
+
+
+        	echo '<br>';
         	echo 'Resistance !';
         } else {
-        	echo 'Niks !';
+        	$totalDMG = $enemy;
+        	echo $totalDMG;
+        	echo 'Normaal';
         }
-
-
-
-		// echo "The enemy Pokemon " . $enemy->getName() . " has taken " . $this->Attack[0]->getDamage() . " damage from your " . $this->Attack[0]->getAttack();		
-		// echo '<br>';
-		// echo $this->getEnergyType();
-		// echo $enemy->getEnergyType();
-		// echo '<br>';
-		// echo 'The enemy Pokemon ' . $enemy->getName() . " now was " . $enemy->getHealth() . " Health left";
-
-		// echo '<br>';
 	}
 }

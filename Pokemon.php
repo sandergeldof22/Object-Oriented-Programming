@@ -10,6 +10,9 @@ class Pokemon {
 	private $Weakness;
 	private $Resistance;
 
+
+	private static $Population = 0;
+
     public function __construct($Name, $EnergyType, $Health, $HitPoints) {
         $this->Name = $Name;
         $this->EnergyType = $EnergyType;
@@ -47,15 +50,20 @@ class Pokemon {
 		echo "Your pokemon " . $this->getName() . " will attack the enemy " . $enemy->getName();
 		echo '<br>';
 		echo $this->getName() . " use your " . $this->Attack[0]->getAttack();
-		echo '<br>';
+		echo '<br>';	
         if ($this->energyType == $enemy->Weakness->energyType) {
-        		$enemy->Health = $enemy->Health - ($this->attacks[0]->Damage * $enemy->Weakness->Multiplier);
+        	$totalDMG = ($this->Attack[0]->Damage * $enemy->Multiplier);
+        	echo $totalDMG;
+        	$enemy->Health = $enemy->Health - $totalDMG;
+        	echo '<br>';
             echo $enemy->getHealth(); //<- moet 20 damage worden, is nu nog 60 damage.
             echo '<br>';
-            echo $enemy->getHitPoints();
+        } else if ($this->energyType == $enemy->Resistance->energyType) {
+        	echo 'Resistance !';
         } else {
-        	echo 'appels';
+        	echo 'Niks !';
         }
+
 
 
 		// echo "The enemy Pokemon " . $enemy->getName() . " has taken " . $this->Attack[0]->getDamage() . " damage from your " . $this->Attack[0]->getAttack();		

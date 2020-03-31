@@ -2,8 +2,8 @@
 
 class Weakness {
 	
-	private $EnergyWeakness;
-	private $Multiplier;
+	public $EnergyWeakness;
+	public $Multiplier;
 
 	public function __construct($EnergyWeakness, $Multiplier){
 		$this->EnergyWeakness = $EnergyWeakness;

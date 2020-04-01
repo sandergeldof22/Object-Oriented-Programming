@@ -2,19 +2,19 @@
 
 class Resistance {
 	
-	private $Resistance;
+	private $description;
 	private $value;
-	public function __construct($Resistance, $value) {
+	public function __construct($description, $value) {
 
-		$this->Resistance = $Resistance;
+		$this->description = $description;
 		$this->value = $value;
 	}
 
-	public function GetResistance(){
-		return $this->Resistance;
+	public function getDescription(){
+		return $this->description;
 	}
 
-	public function Getvalue() {
+	public function getValue() {
 		return $this->value;
 	}
 

@@ -2,20 +2,20 @@
 
 class Attack {
 
-	private $Attack;
-	private $Damage;
-	public function __construct($Attack, $Damage){
+	private $attack;
+	private $damage;
+	public function __construct($attack, $damage){
 
-		$this->Attack = $Attack;
-		$this->Damage = $Damage;
+		$this->attack = $attack;
+		$this->damage = $damage;
 	}
 
 	public function getAttack(){
-		return $this->Attack;
+		return $this->attack;
 	}
 
 	public function getDamage(){
-		return $this->Damage;
+		return $this->damage;
 	}
 
 	public function __get($property) {

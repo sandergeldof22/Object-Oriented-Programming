@@ -2,49 +2,41 @@
 
 class Pokemon {
 
-	private $Name;
-	private $EnergyType;
-	private $Hitpoints;
-	private $Health;
-	private $Attacks;
-	private $Weakness;
-	private $Resistance;
+	private $name;
+	private $energyType;
+	private $hitpoints;
+	private $health;
+	protected $attacks;
+	protected $weakness;
+	protected $resistance;
 
-	private static $Population = 0;
+	private static $population = 0;
 
-    public function __construct($Name, $EnergyType, $Health, $HitPoints) {
-        $this->Name = $Name;
-        $this->EnergyType = $EnergyType;
-        $this->Health = $Health;
-        $this->Hitpoints = $HitPoints;
+    public function __construct($name, $energyType, $health, $hitPoints) {
+        $this->name = $name;
+        $this->energyType = $energyType;
+        $this->health = $health;
+        $this->hitpoints = $hitPoints;
         $this->Attack = [];
-        $this->Weakness = $Weakness;
-        $this->Resistance = $Resistance;
+        $this->weakness = $weakness;
+        $this->resistance = $resistance;
     }
 
     public function getName() {
-      return $this->Name;
+      return $this->name;
     }
 
     public function getEnergyType() {
-    	return $this->EnergyType;
+    	return $this->energyType;
     }
 
     public function getHealth() {
-      return $this->Health;
+      return $this->health;
     }
 
     public function getHitPoints() {
-      return $this->Hitpoints;
+      return $this->hitpoints;
     }
-
-    // public function getWeakness() {
-    // 	return $this->Weakness;
-    // }
-
-    // public function getResistance() {
-    // 	return $this->Resistance;
-    // }
 
     public function __get($property) {
 		if (property_exists($this, $property)){
@@ -53,36 +45,32 @@ class Pokemon {
 	}
 
 	function AttackEnemy($enemy){
-		$energy = $this->getEnergyType();	
-        $Attack = $this->Attack[0]->getAttack();
-        $Damage = $this->Attack[0]->Damage;
-        $enemy = $enemy->getName();
+		$allyEnergy = $this->energyType;
+        $allyAttack = $this->Attack[0]->getAttack();
+        $allyDamage = $this->Attack[0]->damage;
+        $enemyWeakness = $enemy->Weakness->energyWeakness;
+        $enemyResist = $enemy->Resistance->value;
+        $enemyHealth = $enemy->getHealth();
+        $enemyDescription = $enemy->Resistance->description;
+        $totalDamage = $allyDamage - $enemyResist;
+        $totalHealth = $enemyHealth - $totalDamage;
 
-		echo "Your pokemon " . $this->getName() . " will attack the enemy " . $enemy;
+		echo "Your pokemon " . $this->getName() . " will attack the enemy " . $enemy->getName();
 		echo '<br>';
 		echo $this->getName() . " use your " . $this->Attack[0]->getAttack();
 		echo '<br>';
-        if ($energy == $enemy->Weakness->Weakness) {
-        	$totalDMG = ($this->Attack[0]->Damage * $enemy->Weakness->Multiplier);
-        	echo $totalDMG;
-        	$enemy->Health = $enemy->Health - $totalDMG;
+        if ($allyEnergy == $enemyWeakness) {
         	echo '<br>';
-            echo $enemy->getHealth();
-            echo '<br>';
             echo 'Weakness';
-        } else if ($this->energyType == $enemy->Resistance->Resistance) {
-        	$Resistancetest = $enemy->Resistance->Resistance;
-        	echo $Resistancetest;
-        	echo $Attack . " will deal " . $Damage . " Damage";
+        } else if ($allyEnergy == $enemyDescription) {
+        	echo $allyAttack . " will deal " . $allyDamage . " Damage";
         	echo '<br>';
-        	echo "However " . $enemy . " has a resistance to your " . $Attack;
+        	echo "However " . $enemy->getName() . " has a resistance to your " . $allyAttack;
         	echo '<br>';
-        	echo "The resistance will block ... Damage, Meaning the " . $Attack . " will deal only ... damage";
+        	echo "The resistance will block " . $enemyResist . " Damage, Meaning the " . $allyAttack . " will deal only " . ($totalDamage) . " damage";
         	echo '<br>';
-        	$TotalDPS = ($this->Attack[0]->Damage - $enemy->Resistance->value);
-        	echo $TotalDPS;
         	echo '<br>';
-        	echo 'Resistance !';
+        	echo 'The pokemon ' . $enemy->getName() . " now has " . $totalHealth . " Health";
         } else {
         	echo 'Normaal';
         }

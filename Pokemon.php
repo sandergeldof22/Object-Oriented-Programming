@@ -10,7 +10,6 @@ class Pokemon {
 	private $Weakness;
 	private $Resistance;
 
-
 	private static $Population = 0;
 
     public function __construct($Name, $EnergyType, $Health, $HitPoints) {
@@ -19,8 +18,8 @@ class Pokemon {
         $this->Health = $Health;
         $this->Hitpoints = $HitPoints;
         $this->Attack = [];
-        $this->Weakness = [];
-        $this->Resistance = [];
+        $this->Weakness = $Weakness;
+        $this->Resistance = $Resistance;
     }
 
     public function getName() {
@@ -39,23 +38,31 @@ class Pokemon {
       return $this->Hitpoints;
     }
 
+    // public function getWeakness() {
+    // 	return $this->Weakness;
+    // }
+
+    // public function getResistance() {
+    // 	return $this->Resistance;
+    // }
+
     public function __get($property) {
 		if (property_exists($this, $property)){
 			return $this->$property;
 		}
 	}
 
-	public function AttackEnemy($enemy){
+	function AttackEnemy($enemy){
 		$energy = $this->getEnergyType();	
         $Attack = $this->Attack[0]->getAttack();
         $Damage = $this->Attack[0]->Damage;
         $enemy = $enemy->getName();
-		// $enemy voor de verdedigende vijand, //$this voor de aanvaller
+
 		echo "Your pokemon " . $this->getName() . " will attack the enemy " . $enemy;
 		echo '<br>';
 		echo $this->getName() . " use your " . $this->Attack[0]->getAttack();
 		echo '<br>';
-        if ($energy == $enemy->Weakness->energyWeakness) {
+        if ($energy == $enemy->Weakness->Weakness) {
         	$totalDMG = ($this->Attack[0]->Damage * $enemy->Weakness->Multiplier);
         	echo $totalDMG;
         	$enemy->Health = $enemy->Health - $totalDMG;
@@ -63,21 +70,20 @@ class Pokemon {
             echo $enemy->getHealth();
             echo '<br>';
             echo 'Weakness';
-        } else if ($this->energyType == $enemy->Resistance->energyType) {
-        	echo $Attack . " will deal " . $Damage;
+        } else if ($this->energyType == $enemy->Resistance->Resistance) {
+        	$Resistancetest = $enemy->Resistance->Resistance;
+        	echo $Resistancetest;
+        	echo $Attack . " will deal " . $Damage . " Damage";
         	echo '<br>';
         	echo "However " . $enemy . " has a resistance to your " . $Attack;
         	echo '<br>';
         	echo "The resistance will block ... Damage, Meaning the " . $Attack . " will deal only ... damage";
-        	$Resist = $this->Resistance->energytype;
-        	echo $Resist;
-
-
+        	echo '<br>';
+        	$TotalDPS = ($this->Attack[0]->Damage - $enemy->Resistance->value);
+        	echo $TotalDPS;
         	echo '<br>';
         	echo 'Resistance !';
         } else {
-        	$totalDMG = $enemy;
-        	echo $totalDMG;
         	echo 'Normaal';
         }
 	}

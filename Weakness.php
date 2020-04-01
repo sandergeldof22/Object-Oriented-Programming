@@ -2,15 +2,15 @@
 
 class Weakness {
 	
-	private $EnergyWeakness;
+	private $Weakness;
 	private $Multiplier;
-	public function __construct($EnergyWeakness, $Multiplier){
-		
-		$this->EnergyWeakness = $EnergyWeakness;
+	public function __construct($Weakness, $Multiplier){
+
+		$this->Weakness = $Weakness;
 		$this->Multiplier = $Multiplier;
 	}
 
-	public function getEnergyWeakness() {
+	public function getWeakness() {
 		return $this->EnergyWeakness;
 	}
 

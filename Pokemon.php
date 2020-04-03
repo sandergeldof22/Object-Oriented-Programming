@@ -10,7 +10,7 @@ class Pokemon {
 	protected $weakness;
 	protected $resistance;
 
-	private static $population = 0;
+	public static $population = 0;
 
     public function __construct($name, $energyType, $health, $hitPoints) {
         $this->name = $name;
@@ -20,6 +20,8 @@ class Pokemon {
         $this->Attack = [];
         $this->weakness = $weakness;
         $this->resistance = $resistance;
+
+        self::$population += 1;
     }
 
     public function getName() {
@@ -44,7 +46,12 @@ class Pokemon {
 		}
 	}
 
-	function AttackEnemy($enemy){
+	public static function GetPopulation(){
+		return self::$population;
+		var_dump(self::$population);
+	}
+
+	public function AttackEnemy($enemy){
 		$allyEnergy = $this->energyType;
         $allyAttack = $this->Attack[0]->getAttack();
         $allyDamage = $this->Attack[0]->damage;
@@ -67,9 +74,9 @@ class Pokemon {
 
 		echo "Your pokemon " . $this->getName() . " with " . $this->getHealth() . " health will attack the enemy " . $enemy->getName();
 		echo '<br>';
-		echo $this->getName() . " use your " . $this->Attack[0]->getAttack();
+		echo $this->getName() . " use your " . $allyAttack;
 		echo '<br>';
-		
+
         if ($allyEnergy == $enemyWeakness) {
         	echo $allyAttack . " will deal " . $allyDamage . " Damage";
         	echo '<br>';
@@ -99,6 +106,10 @@ class Pokemon {
         	echo '<br>';
         	echo '<br>';
         	echo 'The pokemon ' . $enemy->getName() . " now has " . $totalHealthNormal . " Health";
+        }
+
+        if ($enemyHealth <= 0) {
+        	self::$population--;
         }
 	}
 }

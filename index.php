@@ -20,9 +20,12 @@ require 'Weakness.php';
 </head>
 <body>
 	<?php
-
 $pokemonP->AttackEnemy($pokemonC);
-
+?>
+<br>
+<br>
+<?php
+$pokemonC->AttackEnemy($pokemonP);
 ?>
 </body>
 </html>

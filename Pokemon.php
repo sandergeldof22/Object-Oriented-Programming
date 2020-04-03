@@ -48,31 +48,57 @@ class Pokemon {
 		$allyEnergy = $this->energyType;
         $allyAttack = $this->Attack[0]->getAttack();
         $allyDamage = $this->Attack[0]->damage;
+
         $enemyWeakness = $enemy->Weakness->energyWeakness;
+        $enemyMultiplier = $enemy->Weakness->multiplier;
         $enemyResist = $enemy->Resistance->value;
         $enemyHealth = $enemy->getHealth();
         $enemyDescription = $enemy->Resistance->description;
-        $totalDamage = $allyDamage - $enemyResist;
-        $totalHealth = $enemyHealth - $totalDamage;
 
-		echo "Your pokemon " . $this->getName() . " will attack the enemy " . $enemy->getName();
+        $totalDamageResist = $allyDamage - $enemyResist;
+        $totalHealthResist = $enemyHealth - $totalDamageResist;
+
+        $totalDamageWeakness = $allyDamage * $enemyMultiplier;
+        $totalHealthWeakness = $enemyHealth - $totalDamageWeakness;
+
+        $totalDamageNormal = $allyDamage;
+        $totalHealthNormal = $enemyHealth - $allyDamage;
+
+
+		echo "Your pokemon " . $this->getName() . " with " . $this->getHealth() . " health will attack the enemy " . $enemy->getName();
 		echo '<br>';
 		echo $this->getName() . " use your " . $this->Attack[0]->getAttack();
 		echo '<br>';
+		
         if ($allyEnergy == $enemyWeakness) {
+        	echo $allyAttack . " will deal " . $allyDamage . " Damage";
         	echo '<br>';
-            echo 'Weakness';
+        	echo "However " . $enemy->getName() . " has a weakness to your " . $allyAttack;
+        	echo '<br>';
+        	echo "This weakness will make sure " . $enemy->getName() . " takes " . $enemyMultiplier . " extra damage";
+        	echo '<br>';
+        	echo $enemy->getName() . " is going to take " . $totalDamageWeakness . " damage";
+        	echo '<br>';
+        	echo '<br>';
+        	echo 'The pokemon ' . $enemy->getName() . " now has " . $totalHealthWeakness . " Health";
         } else if ($allyEnergy == $enemyDescription) {
         	echo $allyAttack . " will deal " . $allyDamage . " Damage";
         	echo '<br>';
         	echo "However " . $enemy->getName() . " has a resistance to your " . $allyAttack;
         	echo '<br>';
-        	echo "The resistance will block " . $enemyResist . " Damage, Meaning the " . $allyAttack . " will deal only " . ($totalDamage) . " damage";
+        	echo "The resistance will block " . $enemyResist . " Damage, Meaning the " . $allyAttack . " will deal only " . $totalDamageResist . " damage";
         	echo '<br>';
         	echo '<br>';
-        	echo 'The pokemon ' . $enemy->getName() . " now has " . $totalHealth . " Health";
+        	echo 'The pokemon ' . $enemy->getName() . " now has " . $totalHealthResist . " Health";
         } else {
-        	echo 'Normaal';
+        	echo $allyAttack . " will deal " . $allyDamage . " Damage";
+        	echo '<br>';
+        	echo $enemy->getName() . " has no weaknesses or resistances to your attack so it takes normal damage";
+        	echo '<br>';
+        	echo $enemy->getName() . " is going to take " . $totalDamageNormal . " damage";
+        	echo '<br>';
+        	echo '<br>';
+        	echo 'The pokemon ' . $enemy->getName() . " now has " . $totalHealthNormal . " Health";
         }
 	}
 }

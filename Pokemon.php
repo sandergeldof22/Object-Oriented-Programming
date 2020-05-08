@@ -40,15 +40,14 @@ class Pokemon {
       return $this->hitpoints;
     }
 
+    public static function GetPopulation(){
+        return self::$population;
+    }   
+
     public function __get($property) {
 		if (property_exists($this, $property)){
 			return $this->$property;
 		}
-	}
-
-	public static function GetPopulation(){
-		return self::$population;
-		var_dump(self::$population);
 	}
 
 	public function AttackEnemy($enemy){
@@ -88,6 +87,9 @@ class Pokemon {
         	echo '<br>';
         	echo '<br>';
         	echo 'The pokemon ' . $enemy->getName() . " now has " . $totalHealthWeakness . " Health";
+            echo '<br>';
+            echo '<br>';
+            echo 'De totale populatie van pokemons is: ' . Pokemon::$population;
         } else if ($allyEnergy == $enemyDescription) {
         	echo $allyAttack . " will deal " . $allyDamage . " Damage";
         	echo '<br>';
@@ -97,6 +99,9 @@ class Pokemon {
         	echo '<br>';
         	echo '<br>';
         	echo 'The pokemon ' . $enemy->getName() . " now has " . $totalHealthResist . " Health";
+            echo '<br>';
+            echo '<br>';
+            echo 'De totale populatie van pokemons is: ' . Pokemon::$population;
         } else {
         	echo $allyAttack . " will deal " . $allyDamage . " Damage";
         	echo '<br>';
@@ -106,10 +111,16 @@ class Pokemon {
         	echo '<br>';
         	echo '<br>';
         	echo 'The pokemon ' . $enemy->getName() . " now has " . $totalHealthNormal . " Health";
+            echo '<br>';
+            echo '<br>';
+            echo 'De totale populatie van pokemons is: ' . Pokemon::$population;
         }
 
         if ($enemyHealth <= 0) {
         	self::$population--;
+            echo 'De totale populatie van pokemons is: ' . Pokemon::$population;
         }
 	}
 }
+
+//static population counter werkt nog niet, voor de rest opdracht practisch klaar 

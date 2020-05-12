@@ -123,4 +123,4 @@ class Pokemon {
 	}
 }
 
-//static population counter werkt nog niet, voor de rest opdracht practisch klaar 
+//Yavuz: Meer methods bij attack ofzo + Meer comments.

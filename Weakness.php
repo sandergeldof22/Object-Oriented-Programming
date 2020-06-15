@@ -1,21 +1,14 @@
+
 <?php 
 
 class Weakness {
 	
-	private $energyWeakness;
+	private $weakness;
 	private $multiplier;
-	public function __construct($energyWeakness, $multiplier){
+	public function __construct($weakness, $multiplier){
 
-		$this->energyWeakness = $energyWeakness;
+		$this->weakness = $weakness;
 		$this->multiplier = $multiplier;
-	}
-
-	public function Getweakness() {
-		return $this->energyWeakness;
-	}
-
-	public function getMultiplier() {
-		return $this->multiplier;
 	}
 
 	public function __get($property) {

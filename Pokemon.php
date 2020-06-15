@@ -2,125 +2,102 @@
 
 class Pokemon {
 
-	private $name;
-	private $energyType;
-	private $hitpoints;
-	private $health;
-	protected $attacks;
-	protected $weakness;
-	protected $resistance;
+    private $name;
+    private $energyType;
+    private $hitpoints;
+    private $health;
+    private $attacks;
+    private $weakness;
+    private $resistance;
 
-	public static $population = 0;
+    public static $population = 0;
 
-    public function __construct($name, $energyType, $health, $hitPoints) {
-        $this->name = $name;
-        $this->energyType = $energyType;
-        $this->health = $health;
-        $this->hitpoints = $hitPoints;
-        $this->Attack = [];
-        $this->weakness = $weakness;
-        $this->resistance = $resistance;
+/*
+Onderstaande functie genereert alle pokemondetails voor het constructen van een nieuwe pokemon, als dit gedaan is increment hij de population.
+*/
+    public function __construct($PokemonDetails) {
+        $this->name = $PokemonDetails['name'];
+        $this->nickname = $PokemonDetails['nickname'];
+        $this->energyType = $PokemonDetails['energyType'];
+        $this->health = $PokemonDetails['health'];
+        $this->hitpoints = $PokemonDetails['hitPoints'];
+        $this->attacks = $PokemonDetails['attacks'];
+        $this->weakness = $PokemonDetails['weakness'];
+        $this->resistance = $PokemonDetails['resistance'];
 
         self::$population += 1;
     }
 
-    public function getName() {
-      return $this->name;
-    }
-
-    public function getEnergyType() {
-    	return $this->energyType;
-    }
-
-    public function getHealth() {
-      return $this->health;
-    }
-
-    public function getHitPoints() {
-      return $this->hitpoints;
-    }
-
+/*
+Onderstaande functie haalt de huidige populatie op
+*/
     public static function GetPopulation(){
         return self::$population;
     }   
-
+/*
+Onderstaande functie haalt alle property's op en geeft deze terug.
+*/
     public function __get($property) {
-		if (property_exists($this, $property)){
-			return $this->$property;
-		}
-	}
-
-	public function AttackEnemy($enemy){
-		$allyEnergy = $this->energyType;
-        $allyAttack = $this->Attack[0]->getAttack();
-        $allyDamage = $this->Attack[0]->damage;
-
-        $enemyWeakness = $enemy->Weakness->energyWeakness;
-        $enemyMultiplier = $enemy->Weakness->multiplier;
-        $enemyResist = $enemy->Resistance->value;
-        $enemyHealth = $enemy->getHealth();
-        $enemyDescription = $enemy->Resistance->description;
-
-        $totalDamageResist = $allyDamage - $enemyResist;
-        $totalHealthResist = $enemyHealth - $totalDamageResist;
-
-        $totalDamageWeakness = $allyDamage * $enemyMultiplier;
-        $totalHealthWeakness = $enemyHealth - $totalDamageWeakness;
-
-        $totalDamageNormal = $allyDamage;
-        $totalHealthNormal = $enemyHealth - $allyDamage;
-
-
-		echo "Your pokemon " . $this->getName() . " with " . $this->getHealth() . " health will attack the enemy " . $enemy->getName();
-		echo '<br>';
-		echo $this->getName() . " use your " . $allyAttack;
-		echo '<br>';
-
-        if ($allyEnergy == $enemyWeakness) {
-        	echo $allyAttack . " will deal " . $allyDamage . " Damage";
-        	echo '<br>';
-        	echo "However " . $enemy->getName() . " has a weakness to your " . $allyAttack;
-        	echo '<br>';
-        	echo "This weakness will make sure " . $enemy->getName() . " takes " . $enemyMultiplier . " extra damage";
-        	echo '<br>';
-        	echo $enemy->getName() . " is going to take " . $totalDamageWeakness . " damage";
-        	echo '<br>';
-        	echo '<br>';
-        	echo 'The pokemon ' . $enemy->getName() . " now has " . $totalHealthWeakness . " Health";
-            echo '<br>';
-            echo '<br>';
-            echo 'De totale populatie van pokemons is: ' . Pokemon::$population;
-        } else if ($allyEnergy == $enemyDescription) {
-        	echo $allyAttack . " will deal " . $allyDamage . " Damage";
-        	echo '<br>';
-        	echo "However " . $enemy->getName() . " has a resistance to your " . $allyAttack;
-        	echo '<br>';
-        	echo "The resistance will block " . $enemyResist . " Damage, Meaning the " . $allyAttack . " will deal only " . $totalDamageResist . " damage";
-        	echo '<br>';
-        	echo '<br>';
-        	echo 'The pokemon ' . $enemy->getName() . " now has " . $totalHealthResist . " Health";
-            echo '<br>';
-            echo '<br>';
-            echo 'De totale populatie van pokemons is: ' . Pokemon::$population;
-        } else {
-        	echo $allyAttack . " will deal " . $allyDamage . " Damage";
-        	echo '<br>';
-        	echo $enemy->getName() . " has no weaknesses or resistances to your attack so it takes normal damage";
-        	echo '<br>';
-        	echo $enemy->getName() . " is going to take " . $totalDamageNormal . " damage";
-        	echo '<br>';
-        	echo '<br>';
-        	echo 'The pokemon ' . $enemy->getName() . " now has " . $totalHealthNormal . " Health";
-            echo '<br>';
-            echo '<br>';
-            echo 'De totale populatie van pokemons is: ' . Pokemon::$population;
+        if (property_exists($this, $property)){
+            return $this->$property;
         }
+    }
 
-        if ($enemyHealth <= 0) {
-        	self::$population--;
-            echo 'De totale populatie van pokemons is: ' . Pokemon::$population;
+/*
+Onderstaande functie valt de vijandige pokemon aan, Hij geeft wat informatie door echo's en haalt de gegenereerde damage op uit generateDamage() en healt uit
+changeHealth(), en met die info valt hij de vijandige pokemon aan. en geeft uiteindelijk het eindresultaat van het gevecht weer
+*/
+    public function attackEnemy($enemy, $attacks){
+        echo $this->name . " is a Pokemon whose name is " . $this->nickname . " that has " . $this->health .  " amount of health";
+        echo '<br>';
+        echo $this->name . " is going to attack " . $enemy->name;
+        echo '<br>';
+        echo 'he is going to use ' . $this->attacks[$attacks]->attacks . ' to attack'; 
+        $damage = $this->generateDamage($enemy, $attacks);
+        echo '<br>';
+        echo $enemy->name . " is taking " . $damage . " damage";
+        echo '<br>';
+        $Health = $this->changeHealth($enemy, $damage);
+            if ($Health > 0){
+                echo $enemy->name . " now has " . $enemy->health . " Health";       
+            } else {
+                self::$population--;
+                echo $enemy->name . " has died, yes it's very sad";
+            }
+    }
+/*
+Onderstaande functie genereert de Damage die de vijandige pokemon gaat oplopen. Hij pakt de damage van de attack van de aanvaller, Mocht het zo zijn dat de vijand zijn resistance of weakness gelijk staat aan de energy van de aanvaller hij deze of sterker of zwakker maakt.
+*/
+    public function generateDamage($enemy, $attacks){
+        if ($this->energyType == $enemy->weakness->weakness){
+            $totalWeak = $this->attacks[$attacks]->damage * $enemy->weakness->multiplier;          
+            return $totalWeak;   
+        } else if($this->energyType == $enemy->resistance->energyType) {
+            $totalResist =  $this->attacks[$attacks]->damage - $enemy->resistance->value;
+            return $totalResist;
+        } else { 
+            return $this->attacks[$attackname];
         }
-	}
+    }
+
+
+/*
+Onderstaande functie berekend door middel van de damage die gegeven wordt de health na de aanval en slaat dit op in de huidige health. Hierdoor blijft de huidige health altijd up-to-date
+*/
+    public function changeHealth($enemy, $damage){
+        if ($enemy->health > 0){
+            $enemy->health = $enemy->health - $damage;
+            return $enemy->health;               
+        }
+    }
 }
 
-//Yavuz: Meer methods bij attack ofzo + Meer comments.
+
+/*
+Yavuz: Meer methods bij attack ofzo + Meer comments. 
+
+Danny: Echos veel minder, ook de methods kunnen meer samen en compacter, Idee zelf is goed. en de laatste functie ook meer scheidden
+Berekeningen voor resistances en weaknesses apart doen. bovenndien is het berekenen van de damage en het berekenen van health veel mooier en netter als dit in aparte functies gebeurd. Voor de rest. gedachtegang is zeker goed. 
+
+28-05-2020.. om een of andere reden ziet gitkraken geen veranderingen als ik save? waarom kan ik niet commiten nu?
+*/

@@ -1,21 +1,14 @@
+
 <?php 
 
 class Attack {
 
-	private $attack;
+	private $attacks;
 	private $damage;
-	public function __construct($attack, $damage){
+	public function __construct($attacks, $damage){
 
-		$this->attack = $attack;
+		$this->attacks = $attacks;
 		$this->damage = $damage;
-	}
-
-	public function getAttack(){
-		return $this->attack;
-	}
-
-	public function getDamage(){
-		return $this->damage;
 	}
 
 	public function __get($property) {

@@ -1,0 +1,10 @@
+Deze opdracht ging over het algemeen redelijk. Ik had vanaf dat ik eraan begon door middel van de uitleg wel een klein degelijk beeld van wat ik moest gaan doen. maar ik vind oop over het algemeen nog aan de lastige kant 
+
+Halverwege begon ik voor het eerst te foutjes te krijgen waardoor ik sommige data niet kon oproepen etc, Die zijn uiteindelijk verholpen. Iets wat ik lastiger vond en nu ook
+nog niet voor de volle 100% snap is de "static". Hier zat ik wel even bij stil. Uiteindelijk wel opgelost maar dit vond ik een lastiger onderdeel
+
+Ik heb het ondertussen laten nakijken door Danny, Hij gaf me verschillende opmerkingen waaraan bleek dat ik mn codes toch moest veranderen. Voornamelijk het feit dat ik een hele lange functie
+gebruikte die onder andere vrijwel alles deed. Berekenen van damage, health etc en dit moet apart van elkaar. Nu heb ik daar verschillende functies van gemaakt die elk een doel hebben.
+Dit maakt het netter en stukken leesbaarder. 
+
+Ook was een tip of ik bij de constructor ook alle methods gebruik. Hiervoor deed ik attacks, Weakness en resistance op een andere plek. Nu bevinden ze zich allemaal samen

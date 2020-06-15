@@ -2,20 +2,12 @@
 
 class Resistance {
 	
-	private $description;
+	private $energyType;
 	private $value;
-	public function __construct($description, $value) {
+	public function __construct($energyType, $value) {
 
-		$this->description = $description;
+		$this->energyType = $energyType;
 		$this->value = $value;
-	}
-
-	public function getDescription(){
-		return $this->description;
-	}
-
-	public function getValue() {
-		return $this->value;
 	}
 
 	public function __get($property) {

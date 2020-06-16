@@ -76,7 +76,7 @@ Onderstaande functie genereert de Damage die de vijandige pokemon gaat oplopen. 
             $totalResist =  $this->attacks[$attacks]->damage - $enemy->resistance->value;
             return $totalResist;
         } else { 
-            return $this->attacks[$attackname];
+            return $this->attacks[$attacks]->damage;
         }
     }
 

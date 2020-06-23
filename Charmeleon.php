@@ -15,7 +15,7 @@ class Charmeleon extends Pokemon{
     		    'Flare' => new Attack('Flare', 30)
     		),
     		'weakness' => new Weakness('Water', 2),
-    		'resistance' => new Resistance('Lightning', 20)
+    		'resistance' => new Resistance('Lightning', 10)
    		);
 		parent::__construct($PokemonDetails);   		
 	}

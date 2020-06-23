@@ -12,8 +12,29 @@ class Pokemon {
 
     public static $population = 0;
 
+    // public static $pokemons = [];
+
+    // public static function findByName($name){
+    //     $result = [];
+    //     foreach(self::$pokemons as $pokemon){
+    //         if ($pokemon->name === $name){
+    //             $result[] = $pokemon;
+    //         }
+    //     }
+
+// om nog van te leren !!
+
+    //     return $result;
+    // }
+
 /*
 Onderstaande functie genereert alle pokemondetails voor het constructen van een nieuwe pokemon, als dit gedaan is increment hij de population.
+*/
+
+/**
+
+@param {string} name 
+
 */
     public function __construct($PokemonDetails) {
         $this->name = $PokemonDetails['name'];
@@ -48,16 +69,20 @@ Onderstaande functie valt de vijandige pokemon aan, Hij geeft wat informatie doo
 changeHealth(), en met die info valt hij de vijandige pokemon aan. en geeft uiteindelijk het eindresultaat van het gevecht weer
 */
     public function attackEnemy($enemy, $attacks){
+        $alliedAttacks = $this->attacks[$attacks];
+        $alliedEnergytype = $this->energyType;
+
         echo $this->name . " is a Pokemon whose name is " . $this->nickname . " that has " . $this->health .  " amount of health";
         echo '<br>';
         echo $this->name . " is going to attack " . $enemy->name;
         echo '<br>';
         echo 'he is going to use ' . $this->attacks[$attacks]->attacks . ' to attack'; 
-        $damage = $this->generateDamage($enemy, $attacks);
+
+        $damage = $enemy->TakeDamage($alliedAttacks, $alliedEnergytype);
         echo '<br>';
         echo $enemy->name . " is taking " . $damage . " damage";
         echo '<br>';
-        $Health = $this->changeHealth($enemy, $damage);
+        $Health = $enemy->changeHealth($damage);
             if ($Health > 0){
                 echo $enemy->name . " now has " . $enemy->health . " Health";       
             } else {
@@ -65,33 +90,34 @@ changeHealth(), en met die info valt hij de vijandige pokemon aan. en geeft uite
                 echo $enemy->name . " has died, yes it's very sad";
             }
     }
+
+//weergave en logica scheiden
+
 /*
-Onderstaande functie genereert de Damage die de vijandige pokemon gaat oplopen. Hij pakt de damage van de attack van de aanvaller, Mocht het zo zijn dat de vijand zijn resistance of weakness gelijk staat aan de energy van de aanvaller hij deze of sterker of zwakker maakt.
+Onderstaande functie genereert de Damage die de aangevallende pokemon gaat oplopen. Hij pakt de damage van de attack van de aanvaller, Mocht het zo zijn dat de vijand zijn resistance of weakness gelijk staat aan de energy van de aanvaller hij deze of sterker of zwakker maakt.
 */
-    public function generateDamage($enemy, $attacks){
-        if ($this->energyType == $enemy->weakness->weakness){
-            $totalWeak = $this->attacks[$attacks]->damage * $enemy->weakness->multiplier;          
+    public function TakeDamage($alliedAttacks, $alliedEnergytype){
+        if ($alliedEnergytype == $this->weakness->weakness){
+            $totalWeak = $alliedAttacks->damage * $this->weakness->multiplier;          
             return $totalWeak;   
-        } else if($this->energyType == $enemy->resistance->energyType) {
-            $totalResist =  $this->attacks[$attacks]->damage - $enemy->resistance->value;
+        } else if($alliedEnergytype == $this->resistance->energyType) {
+            $totalResist = $alliedAttacks->damage - $this->resistance->value;
             return $totalResist;
         } else { 
             return $this->attacks[$attacks]->damage;
         }
     }
 
-
 /*
 Onderstaande functie berekend door middel van de damage die gegeven wordt de health na de aanval en slaat dit op in de huidige health. Hierdoor blijft de huidige health altijd up-to-date
 */
-    public function changeHealth($enemy, $damage){
-        if ($enemy->health > 0){
-            $enemy->health = $enemy->health - $damage;
-            return $enemy->health;               
+    public function changeHealth($damage){
+        if ($this->health > 0){
+            $this->health = $this->health - $damage;
+            return $this->health;               
         }
     }
 }
-
 
 /*
 Yavuz: Meer methods bij attack ofzo + Meer comments. 

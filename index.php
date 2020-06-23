@@ -49,11 +49,6 @@ require 'Weakness.php';
 	echo '<br>';
     echo '<br>';
 
-	$pokemonP->attackEnemy($pokemonC, "PikaPunch");
-
-	echo '<br>';
-    echo '<br>';
-
 	echo "the current population of Pokemons is " .  Pokemon::getPopulation();
 
 ?>

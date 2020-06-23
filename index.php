@@ -12,6 +12,21 @@ require 'Weakness.php';
 	$pokemonC = new Charmeleon('rick');
 
 
+	// print($pokemonP->name . ' is a Pokemon whose nickname is ' .  $pokemonP->nickname . " that has " . $pokemonP->health . " amount of health");
+	// print('<br>');
+	// print($pokemonP->name . " is going to attack " . $pokemonC->name);
+ //    print('<br>');
+ //    print('he is going to use ' . $pokemonP->attacks['ElectricRing']->attacks . ' to attack');
+ //    print('<br>');
+ //    print($pokemonC->name . " is taking " . Pokemon::attackEnemy($pokemonC, 'ElectricRing') . " damage");
+ //    print('<br>');        
+ //    print($pokemonC->name . " now has " . $PokemonC->health . " health left");
+
+
+
+
+	
+
 
 ?>
 	

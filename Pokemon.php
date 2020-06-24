@@ -77,8 +77,7 @@ changeHealth(), en met die info valt hij de vijandige pokemon aan. en geeft uite
             if (!$Health > 0){
                 self::$population--;       
             };
-
-        $inform = $this->inform($enemy, $alliedAttacks, $damage);
+        return $damage;
     }
 
 /**
@@ -106,24 +105,7 @@ Onderstaande functie berekend door middel van de damage die gegeven wordt de hea
             return $this->health;               
         }
     }
-
-
-/**
-Onderstaande functie echo'd alle data naar de browser en geeft dit zo duidelijk mogelijk weer wat de resultaten zijn van een gevecht. 
-*/
-    function inform($enemy, $alliedAttacks, $damage){
-        print $this->name . " is a Pokemon whose nickname is " . $this->nickname . " that has " . $this->health . " amount of health";
-        print '<br>';
-        print $this->name . " is going to attack " . $enemy->name;
-        print '<br>';
-        print 'he is going to use ' . $alliedAttacks->attacks . ' to attack'; 
-        print '<br>';
-        print $enemy->name . " is taking " . $damage . " damage";
-        print '<br>';
-        print $enemy->name . " now has " . $enemy->health . " health left";
-    } 
 }
-
 
 
 

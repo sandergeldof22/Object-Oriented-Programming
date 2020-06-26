@@ -89,8 +89,8 @@ Onderstaande functie genereert de Damage die de aangevallende pokemon gaat oplop
             $totalDMG = $alliedAttacks->damage;
         }
         $Health = $this->changeHealth($totalDMG);
-        return $totalDMG;
-        return $Health;
+        return ['damageTaken'=> $totalDMG, 'Health' => $Health];
+
     }
 
 

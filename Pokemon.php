@@ -73,10 +73,6 @@ changeHealth(), en met die info valt hij de vijandige pokemon aan. en geeft uite
         $alliedEnergytype = $this->energyType;
 
         $damage = $enemy->takeDamage($alliedAttacks, $alliedEnergytype);
-        $Health = $enemy->changeHealth($damage);
-            if (!$Health > 0){
-                self::$population--;       
-            };
         return $damage;
     }
 
@@ -84,25 +80,32 @@ changeHealth(), en met die info valt hij de vijandige pokemon aan. en geeft uite
 Onderstaande functie genereert de Damage die de aangevallende pokemon gaat oplopen. Hij pakt de damage van de attack van de aanvaller, Mocht het zo zijn dat de vijand zijn resistance of weakness gelijk staat aan de energy van de aanvaller hij deze of sterker of zwakker maakt.
 */
     public function takeDamage($alliedAttacks, $alliedEnergytype){
+
         if ($alliedEnergytype == $this->weakness->weakness){
-            $totalDMG = $alliedAttacks->damage * $this->weakness->multiplier;          
-            return $totalDMG;   
+            $totalDMG = $alliedAttacks->damage * $this->weakness->multiplier;      
         } else if($alliedEnergytype == $this->resistance->energyType) {
             $totalDMG = $alliedAttacks->damage - $this->resistance->value;
-            return $totalDMG;
         } else { 
             $totalDMG = $alliedAttacks->damage;
-            return $totalDMG;
         }
+        $Health = $this->changeHealth($totalDMG);
+        return $totalDMG;
+        return $Health;
     }
+
 
 /**
 Onderstaande functie berekend door middel van de damage die gegeven wordt de health na de aanval en slaat dit op in de huidige health. Hierdoor blijft de huidige health altijd up-to-date
 */
-    public function changeHealth($damage){
+    public function changeHealth($totalDMG){
         if ($this->health > 0){
-            $this->health = $this->health - $damage;
-            return $this->health;               
+            $this->health = $this->health - $totalDMG;
+                if ($this->health == 0) {
+                    self::$population--;               
+                 } 
+            return $this->health;                     
+        } else {
+            return 0;             
         }
     }
 }

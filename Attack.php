@@ -14,11 +14,11 @@ class Attack {
 
 	}
 
-	// public function __set($property, $value){
-	// 	if ($property === 'cost'){
-	// 		$this->$property = $value;
-	// 	}
-	// }
+	public function __set($property, $value){
+		if ($property === 'cost'){
+			$this->$property = $value;
+		}
+	}
 
 	public function __get($property) { // 'attacks' en 'damage' en 'cost'
 		if (property_exists($this, $property)){
